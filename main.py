@@ -18,7 +18,6 @@ df_forgenre = pd.read_csv('data fastapi/UserForGenre.csv')
 df_UserRecommend =pd.read_csv('data fastapi/UsersRecommend.csv')
 df_UserNotRecommend= pd.read_csv('data fastapi/UsersNotRecommend.csv')
 df_sentiment= pd.read_csv('data fastapi/sentiment_analysis.csv')
-df_recommend = pd.read_csv('data fastapi/sistemarecomendacion.csv')
 
 
 #Endpoint 1: El usuario con mas horas jugadas para el genero y una lista de la acumulación de horas jugadas por año
@@ -96,22 +95,4 @@ def sentiment_analysis(año:int):
     
     return resultado
 
-#Sistema de Recomendacion
 
-# Aplicar One-Hot Encoding a las características
-enc = OneHotEncoder(handle_unknown='ignore')
-X = enc.fit_transform(df_recommend[['genres', 'app_name', 'tags']])
-
-# Calcular la similitud del coseno entre los vectores resultantes
-cosine_sim = cosine_similarity(X)
-
-@app.get("/id")
-def get_recommendations(id:float):
-    # Obtener el índice del juego que coincide con el ID
-    idx = df_recommend[df_recommend['id'] == id].index[0]
-
-    # Obtener las puntuaciones de similitud del juego con todos los demás juegos
-    sim_scores = list(enumerate(cosine_sim[idx]))
-
-    # Ordenar los juegos según las puntuaciones de similitud
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
