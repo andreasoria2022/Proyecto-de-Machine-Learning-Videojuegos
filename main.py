@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.preprocessing import OneHotEncoder
+
 
 app = FastAPI()
 
@@ -18,7 +17,8 @@ df_forgenre = pd.read_csv('data fastapi/UserForGenre.csv')
 df_UserRecommend =pd.read_csv('data fastapi/UsersRecommend.csv')
 df_UserNotRecommend= pd.read_csv('data fastapi/UsersNotRecommend.csv')
 df_sentiment= pd.read_csv('data fastapi/sentiment_analysis.csv')
-df_recommend = pd.read_csv('data fastapi/sistemarecomendacion.csv')
+recommendations_df = pd.read_csv('data fastapi/recomendacion.csv')
+
 
 #Endpoint 1: El usuario con mas horas jugadas para el genero y una lista de la acumulación de horas jugadas por año
 
@@ -95,30 +95,10 @@ def sentiment_analysis(año:int):
     
     return resultado
 
+@app.get("/id")
+def get_recommendations(id:int):
+    
+    # Obtener las recomendaciones para el ID especificado
+    recommendations = recommendations_df[recommendations_df['id'] == id]['recomendaciones'].iloc[0]
 
-# Aplicar One-Hot Encoding a las características
-enc = OneHotEncoder(handle_unknown='ignore')
-X = enc.fit_transform(df_recommend[['genres', 'tags','app_name']])
-
-# Calcular la similitud del coseno entre los vectores resultantes
-cosine_sim = cosine_similarity(X)
-
-# Escribir la función para obtener recomendaciones
-def get_recommendations(game_id, cosine_sim=cosine_sim, df=df):
-    # Verificar si el ID del juego existe en el conjunto de datos
-    if game_id not in df['id'].values:
-        return 'no existe id'
-
-    # Obtener el índice del juego que coincide con el ID
-    idx = df[df['id'] == game_id].index[0]
-
-    # Obtener las puntuaciones de similitud del juego con todos los demás juegos
-    sim_scores = list(enumerate(cosine_sim[idx]))
-
-    # Ordenar los juegos según las puntuaciones de similitud
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-    # Obtener las 5 mejores recomendaciones
-    sim_scores = sim_scores[1:6]
-    game_indices = [i[0] for i in sim_scores]
-    return df['app_name'].iloc[game_indices].tolist()
+    return recommendations
