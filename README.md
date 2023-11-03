@@ -1,3 +1,4 @@
+El proyecto se encuentra en la master
 # Proyecto-de-Machine-Learning-Videojuegos
 Este repositorio es un proyecto de ciencia de datos que se trata de Videojuegos. Se trabajó con tres archivos comprimidos
 El repositorio cuenta con 4 carpetas que se detallan a continuación:
