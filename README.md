@@ -1,3 +1,4 @@
+El proyecto se encuentra en la rama master
 # Proyecto-de-Machine-Learning-Videojuegos
 PROYECTO N° 1 MACHINE LEARNING DE VIDEOJUEGOS
 Este repositorio es un proyecto de ciencia de datos que se trata de Videojuegos. Se trabajó con tres archivos comprimidos
