@@ -19,7 +19,8 @@ En esta carpeta se encuentra un archivo que se detalla a continuación:
 
 -	EDA.ipynb este notebook contiene el EDA es decir el análisis exploratorio de datos. Se analiza nulos, duplicados, análisis de las variables categóricas más importantes se realiza gráficos de barras con el conteo, análisis estadístico de las variables cuantitativas, se aplicó el método describe, se realizaron histogramas, gráficos de caja, mapa de calor.
 
- En esta carpeta se encuentra archivos necesarios para cumplir con los objetivos de este proyecto. Voy a proceder a detallar a continuación:
+ ![image](https://github.com/andreasoria2022/Proyecto-de-Machine-Learning-Videojuegos/assets/105015078/52b875ec-2e22-433c-ac2a-89755e3edbed)
+En esta carpeta se encuentra archivos necesarios para cumplir con los objetivos de este proyecto. Voy a proceder a detallar a continuación:
 
 -	playTimeGenre.ipynb este notebook contiene el procedimiento necesario para lograr obtener un dataset que contiene por género, el año con más horas jugadas. El dataset  se transformó en un csv que se guardó en la carpeta FASTAPI VIDEOJUEGOS Y además una función cuyo input es el género y el output es el año con más horas jugadas (primera función) 
 
